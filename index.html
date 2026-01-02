@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AGC‑128 — Official Converter & Documentation</title>
+
+<style>
+/* ========================= */
+/* DARK THEME */
+/* ========================= */
+body {
+    background: #0d0d0d;
+    color: #e6e6e6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========================= */
+/* HEADER + LOGO */
+/* ========================= */
+header {
+    background: #111;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 2px solid #222;
+}
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #4dd0ff;
+    text-shadow: 0 0 10px #0099cc;
+}
+
+/* ========================= */
+/* NAVIGATION TABS */
+/* ========================= */
+nav {
+    display: flex;
+    justify-content: center;
+    background: #111;
+    border-bottom: 2px solid #222;
+}
+nav button {
+    background: #111;
+    color: #ccc;
+    border: none;
+    padding: 14px 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+nav button:hover {
+    background: #222;
+}
+nav button.active {
+    background: #333;
+    color: #4dd0ff;
+}
+
+/* ========================= */
+/* CONTENT SECTIONS */
+/* ========================= */
+section {
+    display: none;
+    padding: 25px;
+}
+section.active {
+    display: block;
+}
+
+/* ========================= */
+/* TEXTAREAS */
+/* ========================= */
+textarea {
+    width: 100%;
+    background: #1a1a1a;
+    color: #e6e6e6;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px;
+    font-family: Consolas, monospace;
+    resize: vertical;
+}
+
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
+button.action {
+    background: #005fcc;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+button.action:hover {
+    background: #0078ff;
+}
+
+/* ========================= */
+/* COLLAPSIBLE SECTIONS */
+/* ========================= */
+.collapsible {
+    background: #111;
+    color: #4dd0ff;
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.collapsible:hover {
+    background: #222;
+}
+.content {
+    padding: 0 15px;
+    display: none;
+    overflow: hidden;
+    background: #1a1a1a;
+    border-left: 2px solid #333;
+    border-right: 2px solid #333;
+    border-bottom: 2px solid #333;
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #111;
+    color: #777;
+    border-top: 2px solid #222;
+    margin-top: 40px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <div class="logo">AGC‑128 — Adaptive Genetic Code</div>
+</header>
+
+<nav>
+    <button class="tab active" onclick="openTab('converter')">Converter</button>
+    <button class="tab" onclick="openTab('docs')">Documentation</button>
+    <button class="tab" onclick="openTab('about')">About</button>
+</nav>
+
+<!-- ========================= -->
+<!-- TAB 1 — CONVERTER -->
+<!-- ========================= -->
+<section id="converter" class="active">
+
+<h2>Three‑Layer Converter</h2>
+
+<div style="display:flex; gap:15px;">
+    <div style="flex:1;">
+        <h3>Text Layer</h3>
+        <textarea id="textInput" rows="8"></textarea>
+    </div>
+    <div style="flex:1;">
+        <h3>ASCII Layer</h3>
+        <textarea id="asciiLayer" rows="8"></textarea>
+    </div>
+    <div style="flex:1;">
+        <h3>TAGC Layer</h3>
+        <textarea id="tagcLayer" rows="8"></textarea>
+    </div>
+</div>
+
+<br>
+
+<button class="action" onclick="encodeFromText()">Encode</button>
+<button class="action" onclick="decodeFromTAGC()">Decode</button>
+<button class="action" onclick="toggleChecksum()">Toggle Checksum</button>
+<button class="action" onclick="downloadFASTA()">Download FASTA</button>
+
+</section>
+
+<!-- ========================= -->
+<!-- TAB 2 — DOCUMENTATION -->
+<!-- ========================= -->
+<section id="docs">
+
+<h2>AGC‑128 Documentation</h2>
+
+<button class="collapsible">Overview</button>
+<div class="content">
+<p>AGC_128_v.1 is a lightweight, fully reversible DNA‑inspired encoding system...</p>
+</div>
+
+<button class="collapsible">Key Features</button>
+<div class="content">
+<ul>
+<li>Fully reversible encoding</li>
+<li>Self‑checking genetic structure</li>
+<li>Sum‑2 Rule</li>
+<li>No‑Triple Rule</li>
+<li>Deterministic‑Next‑Bit Rule</li>
+</ul>
+</div>
+
+<button class="collapsible">Genetic Alphabet</button>
+<div class="content">
+<pre><code>11 → G
+00 → C
+10 → A
+01 → T
+</code></pre>
+</div>
+
+<button class="collapsible">Example</button>
+<div class="content">
+<pre><code>Input:
+Hello!
+
+Encoded:
+T C G A  T C G A  T C G G  T C G G  T C A A  C C A G
+
+Decoded:
+Hello!
+</code></pre>
+</div>
+
+<button class="collapsible">Notes</button>
+<div class="content">
+<p>This README represents the first official documentation of AGC‑128...</p>
+<pre><code>import tkinter as tk
+from tkinter import filedialog, simpledialog, messagebox
+</code></pre>
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- TAB 3 — ABOUT -->
+<!-- ========================= -->
+<section id="about">
+<h2>About AGC‑128</h2>
+<p>Created by Aleksandar Kitipov & Copilot.</p>
+<p>First recorded chat edition — the origin of the standard.</p>
+</section>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+<footer>
+AGC‑128 v1.0 — Generated on 2026  
+</footer>
+
+<script>
+/* ========================= */
+/* TAB SWITCHING */
+/* ========================= */
+function openTab(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    event.target.classList.add("active");
+}
+
+/* ========================= */
+/* COLLAPSIBLE SECTIONS */
+/* ========================= */
+document.querySelectorAll(".collapsible").forEach(btn => {
+    btn.addEventListener("click", function() {
+        this.classList.toggle("active");
+        let content = this.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+    });
+});
+
+/* ========================= */
+/* AGC‑128 ENGINE (same as before) */
+/* ========================= */
+const nucToInt = { 'C':0, 'T':1, 'A':2, 'G':3 };
+const intToNuc = ['C','T','A','G'];
+let checksumEnabled = true;
+
+function textToAsciiArray(text){return [...text].map(c=>c.charCodeAt(0));}
+function asciiArrayToText(arr){return arr.map(c=>String.fromCharCode(c)).join("");}
+function asciiArrayToString(arr){return arr.join(" ");}
+function asciiStringToArray(str){return str.trim().split(/\s+/).map(Number);}
+
+function asciiArrayToTAGC(arr){
+    let seq=[];
+    for(let ascii of arr){
+        seq.push(intToNuc[(ascii>>6)&3],intToNuc[(ascii>>4)&3],intToNuc[(ascii>>2)&3],intToNuc[ascii&3]);
+    }
+    return seq.join("");
+}
+
+function tagcToAsciiArray(seq){
+    let arr=[];
+    for(let i=0;i<seq.length;i+=4){
+        arr.push((nucToInt[seq[i]]<<6)|(nucToInt[seq[i+1]]<<4)|(nucToInt[seq[i+2]]<<2)|nucToInt[seq[i+3]]);
+    }
+    return arr;
+}
+
+function addChecksum(seq){
+    let sum=[...seq].reduce((a,c)=>a+nucToInt[c],0)%16;
+    let bin=sum.toString(2).padStart(4,"0");
+    return seq+intToNuc[parseInt(bin.slice(0,2),2)]+intToNuc[parseInt(bin.slice(2),2)];
+}
+
+function verifyChecksum(seq){
+    let data=seq.slice(0,-2);
+    return addChecksum(data).slice(-2)===seq.slice(-2);
+}
+
+function toggleChecksum(){
+    checksumEnabled=!checksumEnabled;
+    alert("Checksum enabled: "+checksumEnabled);
+}
+
+function encodeFromText(){
+    let text=document.getElementById("textInput").value;
+    let ascii=textToAsciiArray(text);
+    document.getElementById("asciiLayer").value=asciiArrayToString(ascii);
+    let tagc=asciiArrayToTAGC(ascii);
+    if(checksumEnabled) tagc=addChecksum(tagc);
+    document.getElementById("tagcLayer").value=tagc;
+}
+
+function decodeFromTAGC(){
+    let seq=document.getElementById("tagcLayer").value.trim();
+    if(seq.length%4===2){
+        alert("Checksum valid: "+verifyChecksum(seq));
+        seq=seq.slice(0,-2);
+    }
+    let ascii=tagcToAsciiArray(seq);
+    document.getElementById("asciiLayer").value=asciiArrayToString(ascii);
+    document.getElementById("textInput").value=asciiArrayToText(ascii);
+}
+
+function downloadFASTA(){
+    let seq=document.getElementById("tagcLayer").value.trim();
+    let fasta=">AGC128\n";
+    for(let i=0;i<seq.length;i+=60) fasta+=seq.slice(i,i+60)+"\n";
+    let blob=new Blob([fasta],{type:"text/plain"});
+    let a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download="agc128.fasta";
+    a.click();
+}
+</script>
+
+</body>
+</html>
